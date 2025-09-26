@@ -9,107 +9,113 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
-    body{margin:0;font-family:Inter, sans-serif;background:#0b1220;color:#e6eefc}
-    h1,h3{margin:0}
-    .hero{padding:40px 20px;max-width:900px;margin:auto}
-    .hero h1{font-size:2.2rem;margin-bottom:12px}
-    .lead{color:#b7c3da}
-    .grid{display:grid;gap:20px;max-width:1100px;margin:40px auto;padding:0 20px}
+    :root{
+      --bg-dark:#0e1526;     /* deep navy */
+      --bg-dark-2:#101a33;   /* darker navy */
+      --bg-light:#ffffff;    /* white lower half */
+      --card:#ffffff;        /* white cards on light section */
+      --ink-dark:#0e1526;    /* dark text on light */
+      --ink-light:#f2f7ff;   /* light text on dark */
+      --muted-dark:#4a5a78;
+      --muted-light:#afc4e6;
+      --accent:#2fa4ff;      /* bright blue accent */
+      --accent-2:#2ed9a3;    /* teal accent */
+      --ring:#2fa4ff33;
+      --radius:16px;
+      --shadow:0 10px 30px rgba(0,0,0,.15);
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Inter, sans-serif;background:linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 40%, var(--bg-light) 40%, var(--bg-light) 100%);}
+
+    /* Top nav */
+    .nav{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(8px);
+      background:linear-gradient(180deg, rgba(16,26,51,.92), rgba(16,26,51,.65));border-bottom:1px solid rgba(255,255,255,.07)}
+    .nav-inner{max-width:1100px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+    .brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink-light)}
+    .logo{width:36px;height:36px;border-radius:10px;background:conic-gradient(from 210deg at 50% 50%, var(--accent), var(--accent-2), var(--accent))}
+    .brand strong{font-weight:800}
+    .brand span{color:var(--muted-light);font-weight:600;font-size:12px;text-transform:uppercase}
+    .nav a.link{color:var(--ink-light);text-decoration:none;margin-left:18px;font-weight:600;opacity:.9}
+    .nav a.link:hover{opacity:1;text-shadow:0 0 12px #2fa4ff55}
+
+    /* Hero (dark background section) */
+    .hero{max-width:1100px;margin:0 auto;padding:64px 20px 24px;color:var(--ink-light)}
+    h1{font-size: clamp(28px, 4.6vw, 46px); margin:14px 0 10px}
+    .lead{font-size: clamp(15px, 2.1vw, 18px); color:var(--muted-light); max-width:760px; line-height:1.6}
+    .eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;text-transform:uppercase;
+      background:#0f1d3a;border:1px solid #1d3666;padding:8px 12px;border-radius:999px;color:var(--muted-light)}
+    .eyebrow .dot{width:8px;height:8px;background:var(--accent-2);border-radius:999px;box-shadow:0 0 16px var(--accent-2)}
+
+    /* Team section (white background) */
+    .section{max-width:1100px;margin:0 auto;padding:32px 20px 64px;color:var(--ink-dark)}
+    .grid{display:grid;gap:20px}
     @media(min-width:720px){.grid{grid-template-columns:repeat(2,1fr)}}
     @media(min-width:1000px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:#121b30;border-radius:12px;padding:20px;box-shadow:0 6px 18px rgba(0,0,0,.4)}
-    .avatar{width:56px;height:56px;border-radius:12px;background:#0f182b;display:grid;place-items:center;
-      font-weight:700;color:#09a7ff;margin-bottom:12px}
-    .role{color:#9ac7ff;font-size:.9rem;margin-bottom:10px}
-    .badge{display:inline-block;background:#0f2645;color:#cfe2ff;padding:4px 8px;margin:2px;
-      border-radius:999px;font-size:.75rem}
-    ul{padding-left:20px;color:#b7c3da}
+    .card{background:var(--card);border:1px solid #d0d7e2;border-radius:var(--radius);box-shadow:var(--shadow);padding:20px}
+    .avatar{width:56px;height:56px;border-radius:12px;background:#f0f4fa;display:grid;place-items:center;font-weight:700;color:var(--accent);margin-bottom:12px}
+    .role{color:#2f4f77;font-size:.9rem;margin-bottom:10px}
+    .badge{display:inline-block;background:#eef5ff;color:#17406d;padding:4px 8px;margin:2px;border-radius:999px;font-size:.75rem}
+    ul{padding-left:20px;color:var(--muted-dark)}
     .cta{margin-top:12px}
-    .btn{display:inline-block;margin:4px 6px 0 0;padding:8px 12px;background:#122345;color:#e8f2ff;
-      text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem}
-    footer{padding:30px 20px;text-align:center;color:#91a6c6;font-size:.8rem}
+    .btn{display:inline-block;margin:4px 6px 0 0;padding:8px 12px;background:var(--accent);color:#fff;text-decoration:none;border-radius:8px;font-weight:600;font-size:.9rem}
+    .btn.secondary{background:#2ed9a3;color:#fff}
+    footer{text-align:center;color:#4a5a78;font-size:.8rem;padding:30px 20px}
   </style>
 </head>
 <body>
-  <section class="hero">
-    <h1>Who You'll Have Onsite</h1>
-    <p class="lead">Meet our five lead & senior technicians. They bring years of experience in Toast POS deployments, secure networking, and restaurant operations.</p>
-  </section>
-
-  <section class="grid">
-    <div class="card">
-      <div class="avatar">BR</div>
-      <h3>Ben Rivera</h3>
-      <div class="role">Lead Field Implementation Technician</div>
-      <span class="badge">7+ yrs deployments</span>
-      <span class="badge">Toast / Networking</span>
-      <ul>
-        <li>Multi‑site go‑lives & Toast networking (PC61, SC‑24/48, APs).</li>
-        <li>Staff training, menu validation, printer/KDS orchestration.</li>
-        <li>Known for clean handoff docs and follow‑through.</li>
-      </ul>
-      <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Ben</a></div>
+  <header class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top"><span class="logo"></span>
+        <div><strong>F3 Tech</strong><br/><span>Field Implementation</span></div>
+      </a>
+      <nav><a class="link" href="#team">Team</a><a class="link" href="#contact">Contact</a></nav>
     </div>
+  </header>
 
-    <div class="card">
-      <div class="avatar">PG</div>
-      <h3>Priya Gupta</h3>
-      <div class="role">Senior Implementation Technician</div>
-      <span class="badge">5 yrs</span>
-      <span class="badge">KDS / Printing</span>
-      <ul>
-        <li>KDS, kitchen printers, and expo flows for high‑volume sites.</li>
-        <li>Menu routing QA and edge‑case resolution.</li>
-        <li>Mentors new techs on kitchen workflows.</li>
-      </ul>
-      <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Priya</a></div>
-    </div>
+  <main id="top">
+    <section class="hero">
+      <span class="eyebrow"><span class="dot"></span> Who you'll have onsite</span>
+      <h1>Lead & Senior Technicians Assigned to Your Project</h1>
+      <p class="lead">Our onsite team brings deep experience in Toast POS deployments, secure networking, and restaurant operations. Below are the five leads/seniors most commonly scheduled for complex installs, go‑lives, and trainings in your region.</p>
+    </section>
 
-    <div class="card">
-      <div class="avatar">JD</div>
-      <h3>Jordan Diaz</h3>
-      <div class="role">Senior Network & Install Lead</div>
-      <span class="badge">6 yrs</span>
-      <span class="badge">Switching / APs</span>
-      <ul>
-        <li>Router/switch/AP design & validation; isolates loops quickly.</li>
-        <li>Wi‑Fi & cloud printing readiness testing.</li>
-        <li>Provides clear diagrams and labeling.</li>
-      </ul>
-      <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Jordan</a></div>
-    </div>
+    <section id="team" class="section">
+      <div class="grid">
+        <div class="card"><div class="avatar">BR</div><h3>Ben Rivera</h3><div class="role">Lead Field Implementation Technician</div>
+          <span class="badge">7+ yrs deployments</span><span class="badge">Toast / Networking</span>
+          <ul><li>Multi‑site go‑lives & Toast networking (PC61, SC‑24/48, APs).</li><li>Staff training, menu validation, printer/KDS orchestration.</li><li>Clean handoff docs and follow‑through.</li></ul>
+          <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Ben</a></div></div>
 
-    <div class="card">
-      <div class="avatar">MG</div>
-      <h3>Mackenzie Green</h3>
-      <div class="role">Senior Implementation Specialist</div>
-      <span class="badge">8 yrs</span>
-      <span class="badge">Training & UAT</span>
-      <ul>
-        <li>FOH training, payments, and off‑site flows.</li>
-        <li>Pre‑go‑live checklists and UAT leadership.</li>
-        <li>Strong communicator and issue triager.</li>
-      </ul>
-      <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Mackenzie</a></div>
-    </div>
+        <div class="card"><div class="avatar">PG</div><h3>Priya Gupta</h3><div class="role">Senior Implementation Technician</div>
+          <span class="badge">5 yrs</span><span class="badge">KDS / Printing</span>
+          <ul><li>KDS & kitchen printers for high‑volume sites.</li><li>Menu routing QA, edge‑case resolution.</li><li>Mentors new techs on workflows.</li></ul>
+          <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Priya</a></div></div>
 
-    <div class="card">
-      <div class="avatar">AT</div>
-      <h3>Alex Tran</h3>
-      <div class="role">Lead Implementation Engineer</div>
-      <span class="badge">10 yrs</span>
-      <span class="badge">Complex Sites</span>
-      <ul>
-        <li>Complex integrations and phased cutovers.</li>
-        <li>Menu/data migration oversight and rollback planning.</li>
-        <li>Cross‑team coordination with Support & PMO.</li>
-      </ul>
-      <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Alex</a></div>
-    </div>
-  </section>
+        <div class="card"><div class="avatar">JD</div><h3>Jordan Diaz</h3><div class="role">Senior Network & Install Lead</div>
+          <span class="badge">6 yrs</span><span class="badge">Switching / APs</span>
+          <ul><li>Router/switch/AP design & validation.</li><li>Wi‑Fi & cloud printing readiness testing.</li><li>Clear diagrams & labeling.</li></ul>
+          <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Jordan</a></div></div>
 
-  <footer>
-    © 2025 F3 Tech • Demo “Hall of Fame” site. Replace details as needed.
-  </footer>
+        <div class="card"><div class="avatar">MG</div><h3>Mackenzie Green</h3><div class="role">Senior Implementation Specialist</div>
+          <span class="badge">8 yrs</span><span class="badge">Training & UAT</span>
+          <ul><li>FOH training & EMV/tap payments.</li><li>Pre‑go‑live checklists and UAT.</li><li>Strong communicator & issue triager.</li></ul>
+          <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Mackenzie</a></div></div>
+
+        <div class="card"><div class="avatar">AT</div><h3>Alex Tran</h3><div class="role">Lead Implementation Engineer</div>
+          <span class="badge">10 yrs</span><span class="badge">Complex Sites</span>
+          <ul><li>Complex integrations & phased cutovers.</li><li>Menu/data migration oversight.</li><li>Cross‑team coordination with PMO.</li></ul>
+          <div class="cta"><a href="mailto:field-team@example.com" class="btn">Request Alex</a></div></div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="card"><h3>Project coordination & scheduling</h3>
+        <p>Need a specific skillset or region? Email <a href="mailto:field-team@example.com" style="color:var(--accent)">field-team@example.com</a>.</p>
+        <div class="cta"><a href="mailto:field-team@example.com" class="btn">Email scheduling</a></div>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2025 F3 Tech • Demo Hall of Fame page</footer>
 </body>
 </html>
